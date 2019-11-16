@@ -6,6 +6,7 @@ public class PlayerMech : MonoBehaviour
 {
     // State variables.
     private bool isMech = false;
+    private bool isTransforming = false;
 
     // Component caches.
     private Animator anim;
@@ -19,19 +20,32 @@ public class PlayerMech : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        // If pressed, transform the player.
+        if (Input.GetButtonDown("Fire1") && !isTransforming)
         {
-            if(isMech)
-            {
-                anim.SetTrigger("Robotify");
-            }
-            else
-            {
-                anim.SetTrigger("Tankify");
-            }
-
-            isMech = !isMech;
-            audioSource.Play();
+            TransformMode();
         }
+    }
+
+    private void TransformMode()
+    {
+        if (isMech)
+        {
+            anim.SetTrigger("Robotify");
+        }
+        else
+        {
+            anim.SetTrigger("Tankify");
+        }
+
+        isMech = !isMech;
+        isTransforming = true;
+
+        audioSource.Play();
+    }
+
+    private void TransformEnded()
+    {
+        isTransforming = false;
     }
 }
