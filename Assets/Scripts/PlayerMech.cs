@@ -9,10 +9,12 @@ public class PlayerMech : MonoBehaviour
 
     // Component caches.
     private Animator anim;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -29,6 +31,7 @@ public class PlayerMech : MonoBehaviour
             }
 
             isMech = !isMech;
+            audioSource.Play();
         }
     }
 }
