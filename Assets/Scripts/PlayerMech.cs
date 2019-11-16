@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class PlayerMech : MonoBehaviour
 {
+    // Prefabs.
+    [SerializeField]
+    private GameObject missilePrefab;
+
+    // Hierarchy transforms.
+    [SerializeField]
+    private Transform[] missileLocations;
+
+    private GameObject[] missiles;
+
     // State variables.
     private bool isMech = false;
     private bool isTransforming = false;
@@ -16,6 +26,13 @@ public class PlayerMech : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        missiles = new GameObject[missileLocations.Length];
+        for(int i = 0; i < missileLocations.Length; ++i)
+        {
+            var newMissile = Instantiate(missilePrefab, missileLocations[i].position, transform.rotation, missileLocations[i]);
+            missiles[i] = newMissile;
+        }
     }
 
     private void Update()
