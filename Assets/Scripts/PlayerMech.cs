@@ -73,7 +73,8 @@ public class PlayerMech : MonoBehaviour
 
         for(int i = 0; i < missileLocations.Count; ++i)
         {
-            var newMissile = Instantiate(missilePrefab, missileLocations[i].position, missileLocations[i].rotation, missileLocations[i]);
+            var newMissile = Instantiate(missilePrefab, missileLocations[i].position, missileLocations[i].rotation);
+            newMissile.transform.parent = missileLocations[i];
             missiles.Add(newMissile);
 
             newMissile.SetMech(this);
@@ -97,6 +98,11 @@ public class PlayerMech : MonoBehaviour
 
     private void InputUpdate()
     {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         // Spacebar will transform the player.
         if (Input.GetButtonDown(morphBtn) && !isTransforming)
         {
@@ -113,23 +119,21 @@ public class PlayerMech : MonoBehaviour
         {
             FireMissile();
         }
-
-        var xMovement = Input.GetAxis(horizontalBtn) * transform.forward * currentSpeed;
-        var zMovement = Input.GetAxis(verticalBtn) * transform.right * -currentSpeed; 
+        
+        var xMovement = Input.GetAxis(horizontalBtn) * currentSpeed * transform.forward;
+        var zMovement = Input.GetAxis(verticalBtn) * transform.right * -currentSpeed;
         var yRotate = Input.GetAxis(lookRotateBtn) * currentSpeed;
-
-        moveVector = xMovement + zMovement;
+        
         camRotation = yRotate;
+        moveVector = isMech ? zMovement : xMovement + zMovement;
 
         anim.SetBool("Walking", moveVector.magnitude > 0.01f);
-
-        Debug.Log(moveVector.magnitude > 0.01f);
     }
 
     private void FixedUpdate()
     {
         rigidbody.velocity = (moveVector * 10.0f) + new Vector3(0.0f, rigidbody.velocity.y, 0.0f);
-        transform.Rotate(0.0f, camRotation * camSensitivity, 0.0f);
+        transform.Rotate(0.0f, camRotation * camSensitivity * Time.fixedDeltaTime, 0.0f);
     }
 
     private void TransformMode()
