@@ -53,13 +53,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378331285}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.4999998, y: -0.50000024, z: -0.50000024, w: 0.4999998}
   m_LocalPosition: {x: 0, y: 1.4, z: -1}
   m_LocalScale: {x: 2, y: 4, z: 2.6666672}
   m_Children: []
   m_Father: {fileID: 1325545237100209138}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: -90.00001}
 --- !u!1 &1389567766
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,13 +83,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389567766}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: -1.4, z: -1}
   m_LocalScale: {x: 2, y: 4, z: 2.6666672}
   m_Children: []
   m_Father: {fileID: 1325545237100209138}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: -90.00001}
 --- !u!1 &635463884247424469
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 8172964502105300727}
   m_Layer: 0
   m_Name: PlayerMech
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,8 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c0cd6fcb2cd0047a0556ee79d76c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missilePrefab: {fileID: 5442153073715376875, guid: acab3e69bf07841489ebfb051f3d57be,
-    type: 3}
+  missilePrefab: {fileID: 772477063, guid: acab3e69bf07841489ebfb051f3d57be, type: 3}
   missileLocations:
   - {fileID: 378331286}
   - {fileID: 1389567767}

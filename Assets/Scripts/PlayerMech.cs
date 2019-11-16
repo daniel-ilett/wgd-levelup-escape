@@ -6,17 +6,21 @@ public class PlayerMech : MonoBehaviour
 {
     // Prefabs.
     [SerializeField]
-    private GameObject missilePrefab;
+    private Missile missilePrefab;
 
     // Hierarchy transforms.
     [SerializeField]
-    private Transform[] missileLocations;
+    private List<Transform> missileLocations;
 
-    private GameObject[] missiles;
+    private List<Missile> missiles = new List<Missile>();
 
     // State variables.
     private bool isMech = false;
     private bool isTransforming = false;
+    private int missileID = 0;
+
+    private float missileTime = 0.0f;
+    private const float missileCooldown = 2.0f;
 
     // Component caches.
     private Animator anim;
@@ -27,20 +31,41 @@ public class PlayerMech : MonoBehaviour
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
 
-        missiles = new GameObject[missileLocations.Length];
-        for(int i = 0; i < missileLocations.Length; ++i)
+        for(int i = 0; i < missileLocations.Count; ++i)
         {
-            var newMissile = Instantiate(missilePrefab, missileLocations[i].position, transform.rotation, missileLocations[i]);
-            missiles[i] = newMissile;
+            var newMissile = Instantiate(missilePrefab, missileLocations[i].position, missileLocations[i].rotation, missileLocations[i]);
+            missiles.Add(newMissile);
+
+            newMissile.SetMech(this);
         }
     }
 
     private void Update()
     {
-        // If pressed, transform the player.
+        // Process timing events.
+        TimingUpdate();
+
+        // Process inputs.
+        InputUpdate();
+    }
+
+    private void TimingUpdate()
+    {
+        missileTime += Time.deltaTime;
+    }
+
+    private void InputUpdate()
+    {
+        // Left-click will transform the player.
         if (Input.GetButtonDown("Fire1") && !isTransforming)
         {
             TransformMode();
+        }
+
+        // Right-click will fire a missile.
+        if (Input.GetButtonDown("Fire2") && missileTime > missileCooldown)
+        {
+            FireMissile();
         }
     }
 
@@ -64,5 +89,23 @@ public class PlayerMech : MonoBehaviour
     private void TransformEnded()
     {
         isTransforming = false;
+    }
+
+    private void FireMissile()
+    {
+        missiles[missileID].Fire();
+        missileID = (++missileID) % missiles.Count;
+
+        missileTime = 0.0f;
+    }
+
+    // Give the missile the default parent Transform and position.
+    public void ReturnMissile(Missile missile)
+    {
+        var index = missiles.IndexOf(missile);
+        missile.transform.parent = missileLocations[index];
+
+        missile.transform.localPosition = Vector3.zero;
+        missile.transform.localRotation = Quaternion.identity;
     }
 }
