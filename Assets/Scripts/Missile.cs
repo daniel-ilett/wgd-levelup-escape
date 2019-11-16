@@ -17,6 +17,7 @@ public class Missile : MonoBehaviour
     private bool isFired = false;
     private PlayerMech playerMech;
     private float startFireTime;
+    private string friendTag = "";
 
     private void Start()
     {
@@ -26,6 +27,11 @@ public class Missile : MonoBehaviour
     public void SetMech(PlayerMech playerMech)
     {
         this.playerMech = playerMech;
+    }
+
+    public void SetTag(string tag)
+    {
+        friendTag = tag;
     }
 
     public void Fire()
@@ -67,7 +73,7 @@ public class Missile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // When the missile collides with a non-player, send message and deactivate.
-        if(isFired && other.tag != "Player")
+        if(isFired && other.tag != friendTag && other.tag != transform.tag)
         {
             Explode(other);
         }

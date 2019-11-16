@@ -6,13 +6,22 @@ public class PlayerMech : MonoBehaviour
 {
     // Input axes.
     [SerializeField]
-    private string horizontal;
+    private string horizontalBtn;
 
     [SerializeField]
-    private string vertical;
+    private string verticalBtn;
 
     [SerializeField]
-    private string lookRotation;
+    private string lookRotateBtn;
+
+    [SerializeField]
+    private string morphBtn;
+
+    [SerializeField]
+    private string gunBtn;
+
+    [SerializeField]
+    private string missileBtn;
 
     [SerializeField]
     private float camSensitivity;
@@ -68,6 +77,7 @@ public class PlayerMech : MonoBehaviour
             missiles.Add(newMissile);
 
             newMissile.SetMech(this);
+            newMissile.SetTag("Player");
         }
     }
 
@@ -87,24 +97,33 @@ public class PlayerMech : MonoBehaviour
 
     private void InputUpdate()
     {
-        // Left-click will transform the player.
-        if (Input.GetButtonDown("Fire1") && !isTransforming)
+        // Spacebar will transform the player.
+        if (Input.GetButtonDown(morphBtn) && !isTransforming)
         {
             TransformMode();
         }
 
+        if(Input.GetButton(gunBtn))
+        {
+            FireGun();
+        }
+
         // Right-click will fire a missile.
-        if (Input.GetButtonDown("Fire2") && missileTime > missileCooldown)
+        if (Input.GetButtonDown(missileBtn) && missileTime > missileCooldown)
         {
             FireMissile();
         }
 
-        var xMovement = Input.GetAxis(horizontal) * transform.forward * currentSpeed;
-        var zMovement = Input.GetAxis(vertical) * transform.right * -currentSpeed; 
-        var yRotate = Input.GetAxis(lookRotation) * currentSpeed;
+        var xMovement = Input.GetAxis(horizontalBtn) * transform.forward * currentSpeed;
+        var zMovement = Input.GetAxis(verticalBtn) * transform.right * -currentSpeed; 
+        var yRotate = Input.GetAxis(lookRotateBtn) * currentSpeed;
 
         moveVector = xMovement + zMovement;
         camRotation = yRotate;
+
+        anim.SetBool("Walking", moveVector.magnitude > 0.01f);
+
+        Debug.Log(moveVector.magnitude > 0.01f);
     }
 
     private void FixedUpdate()
@@ -135,7 +154,12 @@ public class PlayerMech : MonoBehaviour
     {
         isTransforming = false;
 
-        currentSpeed = isMech ? walkSpeed : tankSpeed;
+        currentSpeed = isMech ? tankSpeed : walkSpeed;
+    }
+
+    private void FireGun()
+    {
+
     }
 
     private void FireMissile()
