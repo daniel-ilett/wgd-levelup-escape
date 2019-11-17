@@ -3394,5 +3394,13 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2003272551}
+    - target: {fileID: 243224087, guid: 9d847bedba307ae4b9ba4b919612c03b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 243224090, guid: 9d847bedba307ae4b9ba4b919612c03b, type: 3}
+      propertyPath: m_Text
+      value: Caused $0 damage to the capitalist dogs
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d847bedba307ae4b9ba4b919612c03b, type: 3}

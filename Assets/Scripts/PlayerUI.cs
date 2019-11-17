@@ -14,7 +14,11 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     private Text scoreText;
 
+    [SerializeField]
+    private Text timeText;
+
     private int score = 0;
+    private float time = 120.0f;
 
     private string message = "Missile ready!";
 
@@ -32,11 +36,19 @@ public class PlayerUI : MonoBehaviour
     {
         missileFill.fillAmount = player.GetMissileTime() / PlayerMech.missileCooldown;
         missileText.text = (missileFill.fillAmount >= 1.0f) ? message : string.Empty;
+
+        time -= Time.deltaTime;
+        timeText.text = (int)time + "s remaining";
+
+        if(time <= 0.0f)
+        {
+            GameController.instance.EndGame();
+        }
     }
 
     public void AddScore(int points)
     {
         score += points;
-        scoreText.text = "Siezed " + score + " means of production";
+        scoreText.text = "Caused $" + score + " damage to the capitalist dogs";
     }
 }

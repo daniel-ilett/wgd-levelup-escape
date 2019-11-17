@@ -10,6 +10,13 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private PlayerMech player;
 
+    public static GameController instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         player.enabled = false;
@@ -21,5 +28,10 @@ public class GameController : MonoBehaviour
     {
         player.enabled = true;
         cam.StartGame();
+    }
+
+    public void EndGame()
+    {
+        Debug.Log("End game!");
     }
 }
