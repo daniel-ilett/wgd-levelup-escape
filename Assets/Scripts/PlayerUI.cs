@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private Image missileFill;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        missileFill.fillAmount = Time.time % 1.0f;
     }
 }
