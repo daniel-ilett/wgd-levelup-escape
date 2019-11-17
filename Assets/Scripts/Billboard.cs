@@ -14,14 +14,20 @@ public class Billboard : MonoBehaviour
         collider = GetComponent<Collider>();
     }
 
-    public void ResetParts()
+    private void ResetParts()
     {
-        collider.enabled = true;
-
         for(int i = 0; i < parts.Count; ++i)
         {
             parts[i].ResetPart();
         }
+
+        StartCoroutine(Respawn());
+    }
+
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(1.0f);
+        collider.enabled = true;
     }
 
     public void Hit(ExplosionData explosion)
@@ -32,6 +38,8 @@ public class Billboard : MonoBehaviour
         {
             parts[i].Hit(explosion);
         }
+
+        Invoke("ResetParts", 10.0f);
     }
 }
 

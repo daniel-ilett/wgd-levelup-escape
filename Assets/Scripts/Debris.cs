@@ -32,6 +32,22 @@ public class Debris : MonoBehaviour
         rigidbody.isKinematic = true;
         collider.enabled = false;
 
+        StartCoroutine(Respawn());
+    }
+
+    private IEnumerator Respawn()
+    {
+        var currPos = transform.position;
+        var currRot = transform.rotation;
+
+        for(float t = 0.0f; t < 1.0f; t += Time.deltaTime)
+        {
+            transform.position = Vector3.Lerp(currPos, startPos, t);
+            transform.rotation = Quaternion.Slerp(currRot, startRot, t);
+
+            yield return null;
+        }
+
         transform.position = startPos;
         transform.rotation = startRot;
     }
