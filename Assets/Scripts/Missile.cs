@@ -60,19 +60,11 @@ public class Missile : MonoBehaviour
     {
         isFired = false;
 
-        var explosion = new ExplosionData(transform.position, 2.5f, damage);
-
-        /*
-        if (other != null)
-        {
-            other.gameObject.SendMessage("Hit", explosion, SendMessageOptions.DontRequireReceiver);
-        }
-        */
+        var explosion = new ExplosionData(transform.position, 5.0f, damage);
 
         Debug.Log("Send explosion message to all in nearby area.");
 
-        var objects = new List<Collider>(Physics.OverlapSphere(transform.position, 2.5f));
-        objects.Remove(other);
+        var objects = new List<Collider>(Physics.OverlapSphere(transform.position, 5.0f));
 
         for(int i = 0; i < objects.Count; ++i)
         {

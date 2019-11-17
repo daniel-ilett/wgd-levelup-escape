@@ -41,6 +41,8 @@ public class Billboard : MonoBehaviour
         {
             parts[i].rigidbody.isKinematic = false;
             parts[i].collider.enabled = true;
+
+            parts[i].rigidbody.AddExplosionForce(1000.0f, explosion.position - new Vector3(0.0f, 2.5f, 0.0f), explosion.size + 2.5f);
         }
     }
 
