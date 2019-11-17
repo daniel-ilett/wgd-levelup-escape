@@ -60,12 +60,24 @@ public class Missile : MonoBehaviour
     {
         isFired = false;
 
+        var explosion = new ExplosionData(transform.position, 2.5f, damage);
+
+        /*
         if (other != null)
         {
-            other.gameObject.SendMessage("Hit", damage, SendMessageOptions.DontRequireReceiver);
+            other.gameObject.SendMessage("Hit", explosion, SendMessageOptions.DontRequireReceiver);
         }
+        */
 
         Debug.Log("Send explosion message to all in nearby area.");
+
+        var objects = new List<Collider>(Physics.OverlapSphere(transform.position, 2.5f));
+        objects.Remove(other);
+
+        for(int i = 0; i < objects.Count; ++i)
+        {
+            objects[i].gameObject.SendMessage("Hit", explosion, SendMessageOptions.DontRequireReceiver);
+        }
 
         playerMech.ReturnMissile(this);
     }

@@ -31,11 +31,11 @@ public class Billboard : MonoBehaviour
         }
     }
 
-    public void Hit()
+    public void Hit(ExplosionData explosion)
     {
-        Debug.Log("HIT!");
-
         collider.enabled = false;
+
+        Debug.Log("Add force relative to explosion data.");
 
         for(int i = 0; i < parts.Count; ++i)
         {
