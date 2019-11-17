@@ -13,6 +13,9 @@ public class Missile : MonoBehaviour
     [SerializeField]
     private float fireTime = 3.0f;
 
+    [SerializeField]
+    private Transform fireCone;
+
     // State variables.
     private bool isFired = false;
     private PlayerMech playerMech;
@@ -38,6 +41,7 @@ public class Missile : MonoBehaviour
     {
         transform.parent = null;
         isFired = true;
+        fireCone.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -47,6 +51,9 @@ public class Missile : MonoBehaviour
             fireTime -= Time.deltaTime;
 
             transform.position += transform.forward * Time.deltaTime * speed;
+
+            var fireScale = 0.15f + Mathf.Sin(Time.time * 25.0f) * 0.05f;
+            fireCone.localScale = new Vector3(fireScale, fireScale, fireScale);
         }
 
         if(fireTime < 0.0f)
@@ -72,6 +79,7 @@ public class Missile : MonoBehaviour
         }
 
         playerMech.ReturnMissile(this);
+        fireCone.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
