@@ -8,8 +8,17 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     private Image missileFill;
 
+    [SerializeField]
+    private Text missileText;
+
+    private string message = "Missile ready!";
+
+    [SerializeField]
+    private PlayerMech player;
+
     private void Update()
     {
-        missileFill.fillAmount = Time.time % 1.0f;
+        missileFill.fillAmount = player.GetMissileTime() / PlayerMech.missileCooldown;
+        missileText.text = (missileFill.fillAmount >= 1.0f) ? message : string.Empty;
     }
 }

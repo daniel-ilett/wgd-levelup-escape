@@ -53,7 +53,7 @@ public class PlayerMech : MonoBehaviour
     private int missileID = 0;
 
     private float missileTime = 0.0f;
-    private const float missileCooldown = 2.0f;
+    public const float missileCooldown = 2.0f;
 
     private Vector3 moveVector = Vector3.zero;
     private float camRotation = 0.0f;
@@ -182,5 +182,10 @@ public class PlayerMech : MonoBehaviour
 
         missile.transform.localPosition = Vector3.zero;
         missile.transform.localRotation = Quaternion.identity;
+    }
+
+    public float GetMissileTime()
+    {
+        return missileTime;
     }
 }
