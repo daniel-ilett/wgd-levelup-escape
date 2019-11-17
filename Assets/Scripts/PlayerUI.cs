@@ -17,14 +17,15 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     private Text timeText;
 
-    private int score = 0;
+    public static int score { get; private set; } = 0;
+
     private float time = 120.0f;
 
     private string message = "Missile ready!";
 
     [SerializeField]
     private PlayerMech player;
-
+    
     public static PlayerUI instance;
 
     private void Awake()
