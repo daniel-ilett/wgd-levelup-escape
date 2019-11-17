@@ -7,9 +7,9 @@ public struct ExplosionData
 {
     public Vector3 position;
     public float size;
-    public float damage;
+    public int damage;
 
-    public ExplosionData(Vector3 position, float size, float damage)
+    public ExplosionData(Vector3 position, float size, int damage)
     {
         this.position = position;
         this.size = size;

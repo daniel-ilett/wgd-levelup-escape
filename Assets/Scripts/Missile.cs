@@ -8,7 +8,7 @@ public class Missile : MonoBehaviour
     private float speed = 5.0f;
 
     [SerializeField]
-    private float damage = 50.0f;
+    private int damage = 50;
 
     [SerializeField]
     private float fireTime = 3.0f;

@@ -7,6 +7,9 @@ public class Billboard : MonoBehaviour
     [SerializeField]
     private List<Debris> parts;
 
+    private int health = maxHealth;
+    private const int maxHealth = 100;
+
     private new Collider collider;
 
     private void Awake()
@@ -16,6 +19,8 @@ public class Billboard : MonoBehaviour
 
     private void ResetParts()
     {
+        health = maxHealth;
+
         for(int i = 0; i < parts.Count; ++i)
         {
             parts[i].ResetPart();
@@ -32,12 +37,24 @@ public class Billboard : MonoBehaviour
 
     public void Hit(ExplosionData explosion)
     {
+        health -= explosion.damage;
+
+        if(health <= 0)
+        {
+            Die(explosion);
+        }
+    }
+
+    private void Die(ExplosionData explosion)
+    {
         collider.enabled = false;
 
-        for(int i = 0; i < parts.Count; ++i)
+        for (int i = 0; i < parts.Count; ++i)
         {
             parts[i].Hit(explosion);
         }
+
+        PlayerUI.instance.AddScore(5);
 
         Invoke("ResetParts", 10.0f);
     }
