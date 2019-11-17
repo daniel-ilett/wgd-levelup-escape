@@ -168,8 +168,8 @@ MonoBehaviour:
   morphBtn: Jump
   gunBtn: Fire1
   missileBtn: Fire2
-  camSensitivity: 5
-  tankSpeed: 1
+  camSensitivity: 100
+  tankSpeed: 1.25
   morphSpeed: 0.2
   walkSpeed: 0.75
   missilePrefab: {fileID: 772477063, guid: acab3e69bf07841489ebfb051f3d57be, type: 3}

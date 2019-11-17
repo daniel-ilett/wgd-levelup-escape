@@ -13,9 +13,20 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float speed = 5.0f;
 
+    private bool hasGameStarted = false;
+
+    public void StartGame()
+    {
+        hasGameStarted = true;
+    }
+
     private void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, followTarget.position, Time.fixedDeltaTime * speed);
+        if(hasGameStarted)
+        {
+            transform.position = Vector3.Lerp(transform.position, followTarget.position, Time.fixedDeltaTime * speed);
+        }
+        
         transform.LookAt(focusTarget, Vector3.up);
     }
 }
