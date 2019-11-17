@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class Debris : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Vector3 startPos;
+    private Quaternion startRot;
+
+    private new Collider collider;
+    private new Rigidbody rigidbody;
+
+    private void Awake()
     {
-        
+        startPos = transform.position;
+        startRot = transform.rotation;
+
+        collider = GetComponent<Collider>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Hit(ExplosionData explosion)
     {
-        
+        rigidbody.isKinematic = false;
+        collider.enabled = true;
+
+        rigidbody.AddExplosionForce(1000.0f, explosion.position - new Vector3(0.0f, 2.5f, 0.0f), explosion.size + 2.5f);
+    }
+
+    public void ResetPart()
+    {
+        rigidbody.isKinematic = true;
+        collider.enabled = false;
+
+        transform.position = startPos;
+        transform.rotation = startRot;
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3836949580777999197}
   - component: {fileID: 461117793810240774}
   - component: {fileID: 2299782038815727681}
+  - component: {fileID: 79623940}
   m_Layer: 0
   m_Name: Stand
   m_TagString: Untagged
@@ -109,6 +110,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.000001, y: 6.000003, z: 51.000004}
   m_Center: {x: 0.9999392, y: 0.000015258789, z: 24.500002}
+--- !u!114 &79623940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3054179538554300967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89502579c5f891d46b7d4805d4090484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4396692608256204657
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,15 +203,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parts:
-  - rigidbody: {fileID: 8438773083018496931}
-    startPos: {x: 0, y: 0, z: 0}
-    collider: {fileID: 0}
-  - rigidbody: {fileID: 4715710168218711543}
-    startPos: {x: 0, y: 0, z: 0}
-    collider: {fileID: 0}
-  - rigidbody: {fileID: 461117793810240774}
-    startPos: {x: 0, y: 0, z: 0}
-    collider: {fileID: 0}
+  - {fileID: 1276613578}
+  - {fileID: 1992341562}
+  - {fileID: 79623940}
 --- !u!1 &7826201676733994049
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +219,7 @@ GameObject:
   - component: {fileID: 3479096414682183932}
   - component: {fileID: 8438773083018496931}
   - component: {fileID: 7048214309602007006}
+  - component: {fileID: 1276613578}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -309,6 +317,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.20000005, y: 6.0000057, z: 4.000001}
   m_Center: {x: -1.0842022e-19, y: -0.0000004768373, z: 4.000001}
+--- !u!114 &1276613578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7826201676733994049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89502579c5f891d46b7d4805d4090484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7940967494685867422
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +342,7 @@ GameObject:
   - component: {fileID: 2847479701619312467}
   - component: {fileID: 4715710168218711543}
   - component: {fileID: 2567307663697314554}
+  - component: {fileID: 1992341562}
   m_Layer: 0
   m_Name: Stand
   m_TagString: Untagged
@@ -418,3 +439,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.000001, y: 6.000003, z: 51.000004}
   m_Center: {x: 0.9999697, y: 0.000015258789, z: 24.500002}
+--- !u!114 &1992341562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7940967494685867422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89502579c5f891d46b7d4805d4090484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
